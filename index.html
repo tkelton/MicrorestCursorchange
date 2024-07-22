@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Style Based on Position</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: black; 
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const x = event.clientX;
+            const y = event.clientY;
+            
+            // Define the central area
+            const centerSize = 100; // Size of the central area in pixels
+            const centerXMin = (width - centerSize) / 2;
+            const centerXMax = (width + centerSize) / 2;
+            const centerYMin = (height - centerSize) / 2;
+            const centerYMax = (height + centerSize) / 2;
+            
+            if (x >= centerXMin && x <= centerXMax && y >= centerYMin && y <= centerYMax) {
+                // Center of the screen
+                document.body.style.cursor = 'move';
+            } else if (x < width / 2 && y < height / 2) {
+                // Top-left quadrant
+                document.body.style.cursor = 'nw-resize';
+            } else if (x >= width / 2 && y < height / 2) {
+                // Top-right quadrant
+                document.body.style.cursor = 'ne-resize';
+            } else if (x < width / 2 && y >= height / 2) {
+                // Bottom-left quadrant
+                document.body.style.cursor = 'nesw-resize';
+            } else if (x >= width / 2 && y >= height / 2) {
+                // Bottom-right quadrant
+                document.body.style.cursor = 'nwse-resize';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
